@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA4EED4528EECE1200C16AC7 /* toy_robot_vintage.usdz in Resources */ = {isa = PBXBuildFile; fileRef = DA4EED4428EECE1200C16AC7 /* toy_robot_vintage.usdz */; };
+		DA1E4346296F0508003BAA83 /* main.scn in Resources */ = {isa = PBXBuildFile; fileRef = DA1E4345296F0508003BAA83 /* main.scn */; };
+		DA8B9C0E29671B11008F15FD /* biped_robot.usdz in Resources */ = {isa = PBXBuildFile; fileRef = DA8B9C0D29671B11008F15FD /* biped_robot.usdz */; };
 		DA8FFAB428E32A430092D8EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB328E32A430092D8EE /* AppDelegate.swift */; };
 		DA8FFAB628E32A430092D8EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB528E32A430092D8EE /* ViewController.swift */; };
 		DA8FFAB828E32A430092D8EE /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB728E32A430092D8EE /* Experience.rcproject */; };
@@ -17,7 +18,6 @@
 		DA8FFACA28E32A460092D8EE /* _3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAC928E32A460092D8EE /* _3Tests.swift */; };
 		DA8FFAD428E32A460092D8EE /* _3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAD328E32A460092D8EE /* _3UITests.swift */; };
 		DA8FFAD628E32A460092D8EE /* _3UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAD528E32A460092D8EE /* _3UITestsLaunchTests.swift */; };
-		DADCED552922E782005EC522 /* biped_robot.usdz in Resources */ = {isa = PBXBuildFile; fileRef = DADCED542922E781005EC522 /* biped_robot.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA1E4345296F0508003BAA83 /* main.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = main.scn; path = "../../../../Downloads/Pose-Playback-23e89aa8be11857d7d3f3a95dd661bf7c9685f07/Pose Playback/art.scnassets/main.scn"; sourceTree = "<group>"; };
 		DA2D7A4128ED93EE00EB3329 /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
-		DA4EED4428EECE1200C16AC7 /* toy_robot_vintage.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = toy_robot_vintage.usdz; sourceTree = "<group>"; };
+		DA8B9C0D29671B11008F15FD /* biped_robot.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = biped_robot.usdz; path = "../../../../Downloads/Biped Robot-3/biped_robot.usdz"; sourceTree = "<group>"; };
 		DA8FFAB028E32A430092D8EE /* 23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8FFAB328E32A430092D8EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA8FFAB528E32A430092D8EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		DA8FFACF28E32A460092D8EE /* 23UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 23UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8FFAD328E32A460092D8EE /* _3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _3UITests.swift; sourceTree = "<group>"; };
 		DA8FFAD528E32A460092D8EE /* _3UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _3UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		DADCED542922E781005EC522 /* biped_robot.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = biped_robot.usdz; path = "../../../../Downloads/Biped Robot-2/biped_robot.usdz"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +87,7 @@
 				DA8FFAC828E32A460092D8EE /* 23Tests */,
 				DA8FFAD228E32A460092D8EE /* 23UITests */,
 				DA8FFAB128E32A430092D8EE /* Products */,
+				DAEF2B5B296EC17500D15881 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,15 +104,15 @@
 		DA8FFAB228E32A430092D8EE /* 23 */ = {
 			isa = PBXGroup;
 			children = (
+				DA8B9C0D29671B11008F15FD /* biped_robot.usdz */,
 				DA8FFAB328E32A430092D8EE /* AppDelegate.swift */,
 				DA8FFAB528E32A430092D8EE /* ViewController.swift */,
 				DA2D7A4128ED93EE00EB3329 /* MyScene.rcproject */,
 				DA8FFAB728E32A430092D8EE /* Experience.rcproject */,
 				DA8FFAB928E32A430092D8EE /* Main.storyboard */,
-				DADCED542922E781005EC522 /* biped_robot.usdz */,
-				DA4EED4428EECE1200C16AC7 /* toy_robot_vintage.usdz */,
 				DA8FFABC28E32A460092D8EE /* Assets.xcassets */,
 				DA8FFABE28E32A460092D8EE /* LaunchScreen.storyboard */,
+				DA1E4345296F0508003BAA83 /* main.scn */,
 			);
 			path = 23;
 			sourceTree = "<group>";
@@ -131,6 +132,13 @@
 				DA8FFAD528E32A460092D8EE /* _3UITestsLaunchTests.swift */,
 			);
 			path = 23UITests;
+			sourceTree = "<group>";
+		};
+		DAEF2B5B296EC17500D15881 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +204,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
@@ -237,9 +248,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA4EED4528EECE1200C16AC7 /* toy_robot_vintage.usdz in Resources */,
+				DA1E4346296F0508003BAA83 /* main.scn in Resources */,
 				DA8FFAC028E32A460092D8EE /* LaunchScreen.storyboard in Resources */,
-				DADCED552922E782005EC522 /* biped_robot.usdz in Resources */,
+				DA8B9C0E29671B11008F15FD /* biped_robot.usdz in Resources */,
 				DA8FFABD28E32A460092D8EE /* Assets.xcassets in Resources */,
 				DA8FFABB28E32A430092D8EE /* Main.storyboard in Resources */,
 			);

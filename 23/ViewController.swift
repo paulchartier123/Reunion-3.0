@@ -10,114 +10,93 @@ import RealityKit
 import ARKit
 import Combine
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate  {
     
-    @IBOutlet var arView: ARView!
     @IBOutlet var Checher: UISwitch!
+    @IBOutlet var ARSCview: ARSCNView!
     @IBOutlet var Button: UIButton!
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        arView.session.delegate=self
-        setupARView()
-        arView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:))))
-        
-     
-    }
-    func setupARView(){
-        arView.automaticallyConfigureSession = false
+    var robot: SCNNode!
+    var dummyNode: SCNNode!
+    var refNode: SCNNode!
+    
+    private let configuration = ARWorldTrackingConfiguration()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        robot = usdzNodeFromFile("biped_robot", exten: "usdz", internalNode: "biped_robot_ace")!
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = [.horizontal, .vertical]
+        config.planeDetection = [.horizontal]
         config.environmentTexturing = .automatic
-        arView.session.run(config)
+        self.ARSCview.session.run(config)
+        
+        setupARView()
+        
+        ARSCview.delegate = (self as ARSCNViewDelegate)
+        addTapGestureToSceneView()
+        
     }
     
-    @objc
-    func handleTap(recognizer: UITapGestureRecognizer){
-        let location = recognizer.location(in: arView)
-        let result = arView.raycast(from: location, allowing: .estimatedPlane, alignment: .horizontal)
-        if let fres = result.first {
-            let anchor = ARAnchor(name: "robota", transform: fres.worldTransform)
-            arView.session.add(anchor: anchor)
-        }
-        else{
-            print("Failed to place the robot")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.ARSCview.session.run(configuration)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.ARSCview.session.pause()
+    }
+    
+    func setupARView(){
+        // Show statistics such as fps and timing information
+        ARSCview.showsStatistics = true
+        ARSCview.preferredFramesPerSecond = 20
+        ARSCview.rendersContinuously = true
+        ARSCview.autoenablesDefaultLighting = true
+        ARSCview.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         
+    }
+    
+    func addTapGestureToSceneView() {
+        ARSCview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:))))
+      }
+    
+    @objc func didTap(recognizer: UITapGestureRecognizer) {
+        print("JENTRE ICI")
+        robot.enumerateChildNodes { (node, stop) in
+                print(node.name ?? "??")
+            if(node.name == "neck_1_joint")
+            {
+                let rotation = SCNAction.rotateBy(x: CGFloat(Float.pi / 2), y: 0, z: 0, duration: 1)
+                    let repeatRotation = SCNAction.repeatForever(rotation)
+                    node.runAction(repeatRotation)
+            }
         }
+      }
+    
+    
+    private func usdzNodeFromFile(_ file: String, exten: String, internalNode: String) -> SCNNode? {
+        let rootNode = SCNNode()
+        let scale = 1.0
         
-        /*if (Checher .isOn)
+        guard let fileUrl = Bundle.main.url(forResource: file, withExtension: exten) else { fatalError() }
+        let scene = try! SCNScene(url: fileUrl, options: [.checkConsistency: true])
+        let node = scene.rootNode.childNode(withName: internalNode, recursively: true)!
+        node.name = internalNode
+        node.position = SCNVector3(0, 0, 0)
+        node.scale = SCNVector3(scale, scale, scale)
+        rootNode.addChildNode(node)
+        
+        return rootNode
+    }
+   
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard let anchorPlane = anchor as? ARPlaneAnchor else { return }
+        print("Anchor trouvée : ", anchorPlane.planeExtent)
+        if(Checher.isOn)
         {
-            if let fres = result.first {
-                
-            }
-            else{
-                print("Failed to place the robot")
-                
-            }
-        }
-        else{
-            
-            
-            
-        }*/
-        
-    }
-    
-    func placeObject(named entityName: String, for anchor: ARAnchor){
-        var cancellable: AnyCancellable? = nil
-        cancellable = ModelEntity.loadModelAsync(named: "biped_robot")
-            .sink(receiveCompletion: { completion in
-                if case let .failure(error) = completion {
-                    print("Unable to load a model due to error \(error)")
-                }
-            },  receiveValue: { [self] (model: Entity) in
-                if let model = model as? ModelEntity {
-                    
-                    model.physicsBody = PhysicsBodyComponent(mode: .kinematic)
-                    model.generateCollisionShapes(recursive: true)
-                    
-                    cancellable?.cancel()
-                    print("Congrats! Model is successfully loaded!")
-                    arView.installGestures([.rotation, .translation], for: model as HasCollision)
-                    let anchorEntity = AnchorEntity(anchor: anchor)
-                    anchorEntity.addChild(model)
-                    anchorEntity.scale = [50 , 50, 50]
-                    print("ici")
-                    arView.scene.addAnchor(anchorEntity)
-                    //transform(SIMD4<Float>(-0.13516279, -0.14392062, -1.7932674, 0.9999998))
-                    //model.move(to: Transform(translation: [0,0,20]), relativeTo: model, duration: 40, timingFunction: .easeInOut)
-                    let radians = 90.0 * Float.pi / 180.0
-                    let t = Transform(rotation: simd_quatf(angle: radians, axis: SIMD3<Float>(1,0,0)))
-                    //model.findEntity(named: "neck_4_joint")?.move(to: t, relativeTo: model)
-                    
-                    
-                    
-                    print(model.jointNames)
-                    
-                    
-                    
-                    //left_forearm_joint
-                   
-                    
-                    
-                   
-                  
-                        
-                        
-                        
-                }
-            })
-    }
-}
-
-extension ViewController: ARSessionDelegate{
-    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        for anchor in anchors {
-            if let anchorName = anchor.name, anchorName=="robota"{
-                placeObject(named: anchorName, for: anchor)
-            }
+            node.addChildNode(robot)
+            node.castsShadow = true
         }
     }
 }
