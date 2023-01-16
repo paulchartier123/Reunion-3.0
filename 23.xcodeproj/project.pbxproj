@@ -8,16 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		DA1E4346296F0508003BAA83 /* main.scn in Resources */ = {isa = PBXBuildFile; fileRef = DA1E4345296F0508003BAA83 /* main.scn */; };
+		DA31CDDB2974278E006D6C67 /* -3-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA31CDDA2974278E006D6C67 /* -3-Info.plist */; };
 		DA8B9C0E29671B11008F15FD /* biped_robot.usdz in Resources */ = {isa = PBXBuildFile; fileRef = DA8B9C0D29671B11008F15FD /* biped_robot.usdz */; };
 		DA8FFAB428E32A430092D8EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB328E32A430092D8EE /* AppDelegate.swift */; };
 		DA8FFAB628E32A430092D8EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB528E32A430092D8EE /* ViewController.swift */; };
-		DA8FFAB828E32A430092D8EE /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB728E32A430092D8EE /* Experience.rcproject */; };
 		DA8FFABB28E32A430092D8EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8FFAB928E32A430092D8EE /* Main.storyboard */; };
 		DA8FFABD28E32A460092D8EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8FFABC28E32A460092D8EE /* Assets.xcassets */; };
 		DA8FFAC028E32A460092D8EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8FFABE28E32A460092D8EE /* LaunchScreen.storyboard */; };
 		DA8FFACA28E32A460092D8EE /* _3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAC928E32A460092D8EE /* _3Tests.swift */; };
 		DA8FFAD428E32A460092D8EE /* _3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAD328E32A460092D8EE /* _3UITests.swift */; };
 		DA8FFAD628E32A460092D8EE /* _3UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAD528E32A460092D8EE /* _3UITestsLaunchTests.swift */; };
+		DAE5E32B2975C5D5007FA18B /* CustomStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5E32A2975C5D5007FA18B /* CustomStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,12 +40,13 @@
 
 /* Begin PBXFileReference section */
 		DA1E4345296F0508003BAA83 /* main.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = main.scn; path = "../../../../Downloads/Pose-Playback-23e89aa8be11857d7d3f3a95dd661bf7c9685f07/Pose Playback/art.scnassets/main.scn"; sourceTree = "<group>"; };
-		DA2D7A4128ED93EE00EB3329 /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
+		DA31CDD82974276F006D6C67 /* -3Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-3Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DA31CDD929742773006D6C67 /* -3UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-3UITests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DA31CDDA2974278E006D6C67 /* -3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-3-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA8B9C0D29671B11008F15FD /* biped_robot.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = biped_robot.usdz; path = "../../../../Downloads/Biped Robot-3/biped_robot.usdz"; sourceTree = "<group>"; };
 		DA8FFAB028E32A430092D8EE /* 23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8FFAB328E32A430092D8EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA8FFAB528E32A430092D8EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DA8FFAB728E32A430092D8EE /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		DA8FFABA28E32A430092D8EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA8FFABC28E32A460092D8EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA8FFABF28E32A460092D8EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 		DA8FFACF28E32A460092D8EE /* 23UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 23UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8FFAD328E32A460092D8EE /* _3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _3UITests.swift; sourceTree = "<group>"; };
 		DA8FFAD528E32A460092D8EE /* _3UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _3UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DAE5E32A2975C5D5007FA18B /* CustomStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 		DA8FFAA728E32A420092D8EE = {
 			isa = PBXGroup;
 			children = (
+				DA31CDDA2974278E006D6C67 /* -3-Info.plist */,
 				DA8FFAB228E32A430092D8EE /* 23 */,
 				DA8FFAC828E32A460092D8EE /* 23Tests */,
 				DA8FFAD228E32A460092D8EE /* 23UITests */,
@@ -107,8 +111,7 @@
 				DA8B9C0D29671B11008F15FD /* biped_robot.usdz */,
 				DA8FFAB328E32A430092D8EE /* AppDelegate.swift */,
 				DA8FFAB528E32A430092D8EE /* ViewController.swift */,
-				DA2D7A4128ED93EE00EB3329 /* MyScene.rcproject */,
-				DA8FFAB728E32A430092D8EE /* Experience.rcproject */,
+				DAE5E32A2975C5D5007FA18B /* CustomStruct.swift */,
 				DA8FFAB928E32A430092D8EE /* Main.storyboard */,
 				DA8FFABC28E32A460092D8EE /* Assets.xcassets */,
 				DA8FFABE28E32A460092D8EE /* LaunchScreen.storyboard */,
@@ -120,6 +123,7 @@
 		DA8FFAC828E32A460092D8EE /* 23Tests */ = {
 			isa = PBXGroup;
 			children = (
+				DA31CDD82974276F006D6C67 /* -3Tests-Info.plist */,
 				DA8FFAC928E32A460092D8EE /* _3Tests.swift */,
 			);
 			path = 23Tests;
@@ -128,6 +132,7 @@
 		DA8FFAD228E32A460092D8EE /* 23UITests */ = {
 			isa = PBXGroup;
 			children = (
+				DA31CDD929742773006D6C67 /* -3UITests-Info.plist */,
 				DA8FFAD328E32A460092D8EE /* _3UITests.swift */,
 				DA8FFAD528E32A460092D8EE /* _3UITestsLaunchTests.swift */,
 			);
@@ -267,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA31CDDB2974278E006D6C67 /* -3-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,8 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA8FFAB628E32A430092D8EE /* ViewController.swift in Sources */,
+				DAE5E32B2975C5D5007FA18B /* CustomStruct.swift in Sources */,
 				DA8FFAB428E32A430092D8EE /* AppDelegate.swift in Sources */,
-				DA8FFAB828E32A430092D8EE /* Experience.rcproject in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +464,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-3-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -488,7 +496,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-3-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -518,6 +528,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-3Tests-Info.plist";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "PaulCHARTIER.-3Tests";
@@ -538,6 +550,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-3Tests-Info.plist";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "PaulCHARTIER.-3Tests";
@@ -557,6 +571,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-3UITests-Info.plist";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "PaulCHARTIER.-3UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -575,6 +591,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-3UITests-Info.plist";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "PaulCHARTIER.-3UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

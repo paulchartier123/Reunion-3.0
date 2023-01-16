@@ -26,12 +26,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Button"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5W-Gt-O0Q">
-                                <rect key="frame" x="170" y="792" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Button"/>
-                            </button>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cbu-nZ-RFV">
                                 <rect key="frame" x="0.0" y="74" width="414" height="668"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -40,9 +34,11 @@
                         <viewLayoutGuide key="safeArea" id="bIp-QS-Tsm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ARSCview" destination="Cbu-nZ-RFV" id="Zuu-Xm-kmb"/>
-                        <outlet property="Button" destination="s5W-Gt-O0Q" id="1S3-3n-QmJ"/>
+                        <outlet property="Button" destination="fZS-uq-BwI" id="qLG-Ny-KzD"/>
                         <outlet property="Checher" destination="XIT-Ru-Poe" id="fQH-Xf-kqk"/>
                     </connections>
                 </viewController>
