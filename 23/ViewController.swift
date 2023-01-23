@@ -12,14 +12,16 @@ import Combine
 import MultipeerConnectivity
 
 
-
-
-class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSessionDelegate, MCBrowserViewControllerDelegate  {
+class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSessionDelegate, MCBrowserViewControllerDelegate, StreamDelegate  {
+    
+    
     
     @IBOutlet var Checher: UISwitch!
     @IBOutlet var ARSCview: ARSCNView!
     @IBOutlet var Button: UIButton!
     
+    @IBOutlet var connectColor: UIView!
+    @IBOutlet var connectLabel: UILabel!
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
@@ -28,13 +30,28 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     var dummyNode: SCNNode!
     var refNode: SCNNode!
     
-    private let configuration = ARWorldTrackingConfiguration()
+    var inputStream : InputStream!
+    var outputStream : OutputStream!
+    var audioSession : AVAudioSession = AVAudioSession.sharedInstance()
+    var audioPlayer : AVAudioPlayerNode = AVAudioPlayerNode()
+    var engine : AVAudioEngine = AVAudioEngine()
+    var mainMixer : AVAudioMixerNode!
+    var audioFormat : AVAudioFormat!
+    
+    var isConnected : Bool = false
+    
+    
+    
+    private let config = ARWorldTrackingConfiguration()
     
     override func viewDidLoad() {
+        dummyNode = SCNNode()
+        refNode = SCNNode()
         super.viewDidLoad()
         setupConnection()
+        
         robot = usdzNodeFromFile("biped_robot", exten: "usdz", internalNode: "biped_robot_ace")!
-        let config = ARWorldTrackingConfiguration()
+        
         config.planeDetection = [.horizontal]
         config.environmentTexturing = .automatic
         self.ARSCview.session.run(config)
@@ -52,8 +69,15 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.ARSCview.session.pause()
+        mcSession.disconnect()
+        //self.ARSCview.session.pause()
     }
+    
+    func setConnectionStatus(_ isConnected: Bool) {
+        connectColor.backgroundColor = isConnected ? .green : .red
+        connectLabel.text = isConnected ? "Connected" : "Disconnected"
+    }
+    
     
     func setupARView(){
         // Show statistics such as fps and timing information
@@ -70,20 +94,18 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     }
     
     @objc func didTap(recognizer: UITapGestureRecognizer) {
-        print("JENTRE ICI")
-        /*
-         for obj in objects {
-         robot.enumerateChildNodes { (node, stop) in
-         if(obj.name == node.name)
-         {
-         print(node.position)
-         print(obj.name)
-         let vect = SCNVector3(obj.x, obj.y, obj.z)
-         let action = SCNAction.moveBy(x: obj.x, y: obj.y, z: obj.z, duration: 0)
-         node.runAction(action)
-         }
-         }
-         }*/
+        let location = recognizer.location(in: ARSCview)
+        let query = ARSCview.raycastQuery(from: location, allowing: .existingPlaneInfinite, alignment: .horizontal)
+        let result = ARSCview.session.raycast(query!)
+        if let fres = result.first {
+            let anchor = ARAnchor(name: "robota", transform: fres.worldTransform)
+            ARSCview.session.add(anchor: anchor)
+            
+        }
+        else{
+            print("Failed to place the robot")
+        }
+        
     }
     
     @objc func buttonPressed(_ sender: UIButton!)  {
@@ -110,7 +132,7 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     
     func usdzNodeFromFile(_ file: String, exten: String, internalNode: String) -> SCNNode? {
         let rootNode = SCNNode()
-        let scale = 0.3
+        let scale = 1
         
         guard let fileUrl = Bundle.main.url(forResource: file, withExtension: exten) else { fatalError() }
         let scene = try! SCNScene(url: fileUrl, options: [.checkConsistency: true])
@@ -124,12 +146,15 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let anchorPlane = anchor as? ARPlaneAnchor else { return }
-        print("Anchor trouvée : ", anchorPlane.planeExtent)
-        
-        node.addChildNode(robot)
-        node.castsShadow = true
-        
+        let anchorPlane = anchor
+        print("Anchor trouvée : ", anchorPlane.name as Any)
+        if anchor.name == "robota"{
+            let node = self.ARSCview.node(for: anchor)
+            node?.addChildNode(robot)
+        }
+        //node.addChildNode(robot)
+        dummyNode.addChildNode(refNode)
+        self.ARSCview.scene.rootNode.addChildNode(dummyNode)
     }
     
     // MARK: Setup Connection
@@ -138,39 +163,51 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession.delegate = self
         let mcBrowser = MCBrowserViewController(serviceType: "bodytrack", session: self.mcSession)
-        self.present(mcBrowser, animated: true, completion: nil)
+        //self.present(mcBrowser, animated: true, completion: nil)
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
-            
+            DispatchQueue.main.async {
+                self.setConnectionStatus(true)
+            }
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
-            
+            DispatchQueue.main.async {
+                self.setConnectionStatus(true)
+            }
+
         case MCSessionState.notConnected:
             print("Not Connected: \(peerID.displayName)")
+            DispatchQueue.main.async {
+                self.setConnectionStatus(false)
+            }
+
         @unknown default:
             fatalError("Unknow State")
         }
     }
     
     // MARK: Receive the data
-
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        print("jentre dans le receive")
         do {
+            print("puis le do")
             let decoder = JSONDecoder()
-            
-            let matrix = try decoder.decode(CustomStruct.self, from: data)
-            print(matrix.name,matrix.matrix)
+            let joints = try decoder.decode([CustomStruct].self, from: data)
+            for joint in joints {
+                let scnMatrix = SCNMatrix4(joint.matrix)
+                if let tracked = robot.childNode(withName: joint.name, recursively: true) {
+                    tracked.transform = scnMatrix
+                } else {
+                    print("Could not find child node with name: \(joint.name)")
+                }
+            }
         } catch {
             print(error)
         }
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
@@ -181,6 +218,10 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         
     }
     
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true,completion: nil)
     }
@@ -188,9 +229,4 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true,completion: nil)
     }
-    
-}
-
-
-
-
+};

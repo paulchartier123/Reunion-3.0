@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DA1E4346296F0508003BAA83 /* main.scn in Resources */ = {isa = PBXBuildFile; fileRef = DA1E4345296F0508003BAA83 /* main.scn */; };
 		DA31CDDB2974278E006D6C67 /* -3-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA31CDDA2974278E006D6C67 /* -3-Info.plist */; };
+		DA53B65B297DDAE60097D485 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53B65A297DDAE60097D485 /* ViewController2.swift */; };
+		DA548EFA297954AC005BE35D /* AudioConverterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA548EF9297954AC005BE35D /* AudioConverterHelper.swift */; };
 		DA8B9C0E29671B11008F15FD /* biped_robot.usdz in Resources */ = {isa = PBXBuildFile; fileRef = DA8B9C0D29671B11008F15FD /* biped_robot.usdz */; };
 		DA8FFAB428E32A430092D8EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB328E32A430092D8EE /* AppDelegate.swift */; };
 		DA8FFAB628E32A430092D8EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FFAB528E32A430092D8EE /* ViewController.swift */; };
@@ -43,6 +45,8 @@
 		DA31CDD82974276F006D6C67 /* -3Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-3Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA31CDD929742773006D6C67 /* -3UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-3UITests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA31CDDA2974278E006D6C67 /* -3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-3-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DA53B65A297DDAE60097D485 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
+		DA548EF9297954AC005BE35D /* AudioConverterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioConverterHelper.swift; sourceTree = "<group>"; };
 		DA8B9C0D29671B11008F15FD /* biped_robot.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = biped_robot.usdz; path = "../../../../Downloads/Biped Robot-3/biped_robot.usdz"; sourceTree = "<group>"; };
 		DA8FFAB028E32A430092D8EE /* 23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8FFAB328E32A430092D8EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +115,9 @@
 				DA8B9C0D29671B11008F15FD /* biped_robot.usdz */,
 				DA8FFAB328E32A430092D8EE /* AppDelegate.swift */,
 				DA8FFAB528E32A430092D8EE /* ViewController.swift */,
+				DA53B65A297DDAE60097D485 /* ViewController2.swift */,
 				DAE5E32A2975C5D5007FA18B /* CustomStruct.swift */,
+				DA548EF9297954AC005BE35D /* AudioConverterHelper.swift */,
 				DA8FFAB928E32A430092D8EE /* Main.storyboard */,
 				DA8FFABC28E32A460092D8EE /* Assets.xcassets */,
 				DA8FFABE28E32A460092D8EE /* LaunchScreen.storyboard */,
@@ -283,9 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA53B65B297DDAE60097D485 /* ViewController2.swift in Sources */,
 				DA8FFAB628E32A430092D8EE /* ViewController.swift in Sources */,
 				DAE5E32B2975C5D5007FA18B /* CustomStruct.swift in Sources */,
 				DA8FFAB428E32A430092D8EE /* AppDelegate.swift in Sources */,
+				DA548EFA297954AC005BE35D /* AudioConverterHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
