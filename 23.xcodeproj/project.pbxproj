@@ -473,6 +473,7 @@
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "-3-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Réunion 3.0";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -505,6 +506,7 @@
 				DEVELOPMENT_TEAM = 3S254J7252;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "-3-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Réunion 3.0";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

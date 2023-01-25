@@ -16,6 +16,8 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     
     
     
+    
+    
     @IBOutlet var Checher: UISwitch!
     @IBOutlet var ARSCview: ARSCNView!
     @IBOutlet var Button: UIButton!
@@ -40,8 +42,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     
     var isConnected : Bool = false
     
-    
-    
     private let config = ARWorldTrackingConfiguration()
     
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         setupConnection()
         
         robot = usdzNodeFromFile("biped_robot", exten: "usdz", internalNode: "biped_robot_ace")!
-        
+        config.sceneReconstruction = .mesh
         config.planeDetection = [.horizontal]
         config.environmentTexturing = .automatic
         self.ARSCview.session.run(config)
@@ -95,7 +95,7 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     
     @objc func didTap(recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: ARSCview)
-        let query = ARSCview.raycastQuery(from: location, allowing: .existingPlaneInfinite, alignment: .horizontal)
+        let query = ARSCview.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal)
         let result = ARSCview.session.raycast(query!)
         if let fres = result.first {
             let anchor = ARAnchor(name: "robota", transform: fres.worldTransform)
@@ -146,8 +146,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        let anchorPlane = anchor
-        print("Anchor trouvée : ", anchorPlane.name as Any)
         if anchor.name == "robota"{
             let node = self.ARSCview.node(for: anchor)
             node?.addChildNode(robot)
@@ -157,12 +155,18 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         self.ARSCview.scene.rootNode.addChildNode(dummyNode)
     }
     
+    func displayChildNodes(_ node: SCNNode) {
+        node.enumerateChildNodes { (childNode, _) in
+            print(childNode.name ?? "Unnamed Node")
+            displayChildNodes(childNode)
+        }
+    }
+    
     // MARK: Setup Connection
     func setupConnection(){
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession.delegate = self
-        let mcBrowser = MCBrowserViewController(serviceType: "bodytrack", session: self.mcSession)
         //self.present(mcBrowser, animated: true, completion: nil)
     }
     
@@ -178,33 +182,38 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
             DispatchQueue.main.async {
                 self.setConnectionStatus(true)
             }
-
+            
         case MCSessionState.notConnected:
             print("Not Connected: \(peerID.displayName)")
             DispatchQueue.main.async {
                 self.setConnectionStatus(false)
             }
-
+            
         @unknown default:
             fatalError("Unknow State")
         }
     }
     
     // MARK: Receive the data
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print("jentre dans le receive")
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID){
         do {
-            print("puis le do")
             let decoder = JSONDecoder()
             let joints = try decoder.decode([CustomStruct].self, from: data)
-            for joint in joints {
-                let scnMatrix = SCNMatrix4(joint.matrix)
-                if let tracked = robot.childNode(withName: joint.name, recursively: true) {
-                    tracked.transform = scnMatrix
-                } else {
-                    print("Could not find child node with name: \(joint.name)")
+            DispatchQueue.global(qos: .background).async {
+                for joint in joints {
+                    let scnMatrix = SCNMatrix4(joint.matrix)
+                    if let tracked = self.robot.childNode(withName: joint.name, recursively: true) {
+                        DispatchQueue.main.async {
+                            tracked.transform = scnMatrix
+                        }
+                    } else {
+                        print("Could not find child node with name: \(joint.name)")
+                    }
                 }
             }
+            
+            
+            
         } catch {
             print(error)
         }
