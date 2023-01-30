@@ -13,10 +13,7 @@ import MultipeerConnectivity
 
 
 class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSessionDelegate, MCBrowserViewControllerDelegate, StreamDelegate  {
-    
-    
-    
-    
+
     
     @IBOutlet var Checher: UISwitch!
     @IBOutlet var ARSCview: ARSCNView!
@@ -57,7 +54,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         self.ARSCview.session.run(config)
         setupARView()
         Button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        
         ARSCview.delegate = (self as ARSCNViewDelegate)
         addTapGestureToSceneView()
         
@@ -78,7 +74,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         connectLabel.text = isConnected ? "Connected" : "Disconnected"
     }
     
-    
     func setupARView(){
         // Show statistics such as fps and timing information
         ARSCview.showsStatistics = true
@@ -86,7 +81,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         ARSCview.rendersContinuously = true
         ARSCview.autoenablesDefaultLighting = true
         //ARSCview.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showSkeletons]
-        
     }
     
     func addTapGestureToSceneView() {
@@ -100,12 +94,10 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         if let fres = result.first {
             let anchor = ARAnchor(name: "robota", transform: fres.worldTransform)
             ARSCview.session.add(anchor: anchor)
-            
         }
         else{
             print("Failed to place the robot")
         }
-        
     }
     
     @objc func buttonPressed(_ sender: UIButton!)  {
@@ -150,7 +142,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
             let node = self.ARSCview.node(for: anchor)
             node?.addChildNode(robot)
         }
-        //node.addChildNode(robot)
         dummyNode.addChildNode(refNode)
         self.ARSCview.scene.rootNode.addChildNode(dummyNode)
     }
@@ -167,7 +158,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession.delegate = self
-        //self.present(mcBrowser, animated: true, completion: nil)
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -211,9 +201,6 @@ class ViewController: UIViewController,ARSCNViewDelegate, ARSessionDelegate,MCSe
                     }
                 }
             }
-            
-            
-            
         } catch {
             print(error)
         }

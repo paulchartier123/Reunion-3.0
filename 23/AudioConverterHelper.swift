@@ -27,7 +27,6 @@ class AudioConverterHelper {
         return audioByteArray
     }
     
-    
     static func bytesToAudioBuffer(_ buf: [UInt8]) -> AVAudioPCMBuffer {
         
         let audioFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 8000, channels: 1, interleaved: false)
@@ -38,7 +37,6 @@ class AudioConverterHelper {
         audioBuffer!.frameLength = frameLength
         
         let dstLeft = audioBuffer?.floatChannelData![0]
-        
         
         buf.withUnsafeBufferPointer {
             let src = UnsafeRawPointer($0.baseAddress!).bindMemory(to: Float.self, capacity: Int(frameLength))
